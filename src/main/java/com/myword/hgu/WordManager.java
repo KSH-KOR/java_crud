@@ -17,6 +17,7 @@ public class WordManager {
 
     private final Scanner s = new Scanner(System.in);
     private final WordCRUD wordCRUD;
+    private boolean isProgramRunning;
 
     WordManager(){
         wordCRUD = new WordCRUD(s);
@@ -53,8 +54,14 @@ public class WordManager {
 //        );
         return MenuOptions.values()[s.nextInt() - 1];
     }
+
+    public void end(){
+        isProgramRunning = false;
+        System.out.println("프로그램 종료! 다음에 만나요~");
+    }
     public void start(){
-        while(true){
+        isProgramRunning = true;
+        while(isProgramRunning){
             switch (selectMenu()){
                 case allWords -> {
                     wordCRUD.listAll();
@@ -77,7 +84,7 @@ public class WordManager {
                 case saveInFiles -> {
                 }
                 case exit -> {
-                    break;
+                    end();
                 }
             }
         }
