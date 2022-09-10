@@ -79,7 +79,7 @@ public class WordManager {
                     wordCRUD.updateWord();
                 }
                 case deleteWords -> {
-                    //wordCRUD.delete();
+                    wordCRUD.deleteWord();
                 }
                 case saveInFiles -> {
                 }

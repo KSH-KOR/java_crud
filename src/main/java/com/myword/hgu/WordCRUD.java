@@ -8,8 +8,6 @@ public class WordCRUD implements ICRUD{
     ArrayList<Word> list;
     Scanner s;
 
-
-
     public WordCRUD(Scanner s) {
         this.list = new ArrayList<Word>();
         this.s = s;
@@ -69,7 +67,32 @@ public class WordCRUD implements ICRUD{
 
     @Override
     public int delete(Object obj) {
+        list.remove(obj);
         return 0;
+    }
+
+    public void deleteWord(){
+        System.out.println("삭제할 단어 검색 : ");
+        s.nextLine();
+        String keyword = s.nextLine();
+        ArrayList<String> wordIdList = this.listAll(keyword);
+        if(wordIdList.isEmpty()){
+            System.out.println("검색된 항목이 없습니다.");
+            return;
+        } else {
+            System.out.println("=> 삭제할 번호 선택 : ");
+            int indexOfWordIdList = s.nextInt() - 1;
+            s.nextLine();
+            System.out.println("=> 정말로 삭제하실래요?(Y/n) : ");
+            String answer = s.next();
+            s.nextLine();
+            if (answer.equalsIgnoreCase("Y")) {
+                delete(getWordFromId(wordIdList.get(indexOfWordIdList)));
+                System.out.println("단어가 삭제 되었습니다.");
+            } else {
+                System.out.println("취소되었습니다.");
+            }
+        }
     }
 
     @Override
