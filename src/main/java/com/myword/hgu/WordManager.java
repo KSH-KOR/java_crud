@@ -64,7 +64,7 @@ public class WordManager {
         while(isProgramRunning){
             switch (selectMenu()){
                 case allWords -> {
-                    wordCRUD.listAll();
+                    wordCRUD.listAll(null);
                 }
                 case searchWordsDependsOnDifficulty -> {
 
@@ -76,7 +76,7 @@ public class WordManager {
                     wordCRUD.addWord();
                 }
                 case updateWords -> {
-                    //wordCRUD.update();
+                    wordCRUD.updateWord();
                 }
                 case deleteWords -> {
                     //wordCRUD.delete();

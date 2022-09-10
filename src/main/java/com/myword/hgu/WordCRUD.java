@@ -8,9 +8,18 @@ public class WordCRUD implements ICRUD{
     ArrayList<Word> list;
     Scanner s;
 
+
+
     public WordCRUD(Scanner s) {
         this.list = new ArrayList<Word>();
         this.s = s;
+    }
+
+    private Word getWordFromId(String id){
+        for(Word word: list){
+            if(word.getId().equals(id)) return word;
+        }
+        return (Word) add();
     }
 
     @Override
@@ -39,6 +48,22 @@ public class WordCRUD implements ICRUD{
     }
 
     public void updateWord(){
+        System.out.println("수정할 단어 검색 : ");
+        s.nextLine();
+        String keyword = s.nextLine();
+        ArrayList<String> wordIdList = this.listAll(keyword);
+        if(wordIdList.isEmpty()){
+            System.out.println("검색된 항목이 없습니다.");
+            return;
+        } else{
+            System.out.println("=> 수정할 번호 선택 : ");
+            int indexOfWordIdList = s.nextInt()-1;
+            s.nextLine();
+            System.out.println("=> 뜻 입력 : ");
+            String meaning = s.nextLine();
+            getWordFromId(wordIdList.get(indexOfWordIdList)).setMeaning(meaning);
+            System.out.println("단어가 수정 되었습니다.");
+        }
 
     }
 
@@ -52,13 +77,35 @@ public class WordCRUD implements ICRUD{
 
     }
 
-    public void listAll(){
+    public ArrayList<String> listAll(String keyword){
+        ArrayList<String> wordIdList = new ArrayList<>();
 
         System.out.println("----------------------------");
-        for(int i =0 ; i < list.size(); i++){
-            System.out.print((i+1) + " ");
-            System.out.println(list.get(i));
+        if(keyword == null){
+            for(int i =0 ; i < list.size(); i++){
+                System.out.print((i+1) + " ");
+                System.out.println(list.get(i).toString());
+            }
+        } else{
+            int j = 1;
+            for(Word word: list){
+                if(word.getWord().contains(keyword)){
+                    System.out.print((j) + " ");
+                    System.out.println(word.toString());
+                    wordIdList.add(word.getId());
+                    j++;
+                }
+            }
         }
         System.out.println("----------------------------");
+        return wordIdList.isEmpty() ? wordIdList : getWordIdAll();
+    }
+
+    private ArrayList<String> getWordIdAll(){
+        ArrayList<String> wordIdList = new ArrayList<>();
+        for(Word word: list){
+            wordIdList.add(word.getId());
+        }
+        return wordIdList;
     }
 }
