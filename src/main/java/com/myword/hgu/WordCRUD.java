@@ -1,9 +1,6 @@
 package com.myword.hgu;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.UUID;
@@ -29,6 +26,19 @@ public class WordCRUD implements ICRUD{
             System.out.println("==> " + count + "개 로딩 완료!!");
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void saveFile() {
+        try {
+            PrintWriter printWriter = new PrintWriter(new FileWriter(fileName));
+            for(Word word: list){
+                printWriter.write(word.toFileFormatString() + "\n");
+            }
+            printWriter.close();
+            System.out.println("파일 저장 완료!");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

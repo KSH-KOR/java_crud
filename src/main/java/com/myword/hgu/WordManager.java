@@ -83,6 +83,7 @@ public class WordManager {
                     wordCRUD.deleteWord();
                 }
                 case saveInFiles -> {
+                    wordCRUD.saveFile();
                 }
                 case exit -> {
                     end();

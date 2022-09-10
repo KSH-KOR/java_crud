@@ -63,4 +63,8 @@ public class Word {
                 meaning;
         return str;
     }
+
+    public String toFileFormatString(){
+        return this.getLevel() + "\\|" + this.getWord() +"\\|" + this.getMeaning();
+    }
 }
