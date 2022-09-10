@@ -68,7 +68,7 @@ public class WordManager {
                     wordCRUD.listAll(null);
                 }
                 case searchWordsDependsOnDifficulty -> {
-
+                    wordCRUD.searchLevel();
                 }
                 case searchWords -> {
                     //wordCRUD.selectOne();

@@ -49,19 +49,14 @@ public class WordCRUD implements ICRUD{
         this.s = s;
     }
 
-    private Word getWordFromId(String id){
-        for(Word word: list){
-            if(word.getId().equals(id)) return word;
-        }
-        return (Word) add();
-    }
+
 
     @Override
     public Object add() {
         System.out.println("=> 난이도(1,2,3) & 새 단어 입력 : ");
         //System.out.println("=> Enter difficulty(1,2,3) & new vocab : ");
         int level = s.nextInt();
-        String word = s.nextLine();
+        String word = s.nextLine().trim();
         System.out.println("뜻 입력: ");
         //System.out.println("Enter meaning: ");
         String meaning = s.nextLine();
@@ -133,33 +128,48 @@ public class WordCRUD implements ICRUD{
         }
     }
 
+    public void searchLevel() {
+        int level;
+        System.out.println("=> 원하는 레벨은? (1,2,3) : ");
+        while(true){
+            level = s.nextInt();
+            if(level < 1 || level > 3){
+                System.out.println("1, 2, 3 중에 입력해 주세요.");
+            } else{
+                break;
+            }
+        }
+        listAll(level);
+
+    }
+
     @Override
     public void selectOne(Object obj) {
 
     }
 
-    public ArrayList<String> listAll(String keyword){
+    private ArrayList<String> printWordList(ArrayList<Word> wordList){
         ArrayList<String> wordIdList = new ArrayList<>();
-
         System.out.println("----------------------------");
-        if(keyword == null){
-            for(int i =0 ; i < list.size(); i++){
-                System.out.print((i+1) + " ");
-                System.out.println(list.get(i).toString());
-            }
-        } else{
-            int j = 1;
-            for(Word word: list){
-                if(word.getWord().contains(keyword)){
-                    System.out.print((j) + " ");
-                    System.out.println(word.toString());
-                    wordIdList.add(word.getId());
-                    j++;
-                }
-            }
+        int i=1;
+        for(Word word: wordList){
+            System.out.print((i) + " ");
+            System.out.println(word.toString());
+            wordIdList.add(word.getId());
+            i++;
         }
         System.out.println("----------------------------");
-        return wordIdList.isEmpty() ? wordIdList : getWordIdAll();
+        return wordIdList;
+    }
+
+    public ArrayList<String> listAll(int level){
+        ArrayList<Word> wordList = getWordListByLevel(level);
+        return printWordList(wordList);
+    }
+
+    public ArrayList<String> listAll(String keyword){
+        ArrayList<Word> wordList = getWordListByKeyword(keyword);
+        return printWordList(wordList);
     }
 
     private ArrayList<String> getWordIdAll(){
@@ -169,4 +179,33 @@ public class WordCRUD implements ICRUD{
         }
         return wordIdList;
     }
+
+    private ArrayList<Word> getWordListByKeyword(String keyword){
+        keyword = keyword == null ? "" : keyword;
+        ArrayList<Word> wordList = new ArrayList<>();
+        for(Word word: list){
+            if(word.getWord().contains(keyword)){
+                wordList.add(word);
+            }
+        }
+        return wordList;
+    }
+
+    private Word getWordFromId(String id){
+        for(Word word: list){
+            if(word.getId().equals(id)) return word;
+        }
+        return (Word) add();
+    }
+
+    private ArrayList<Word> getWordListByLevel(int level){
+        ArrayList<Word> wordList = new ArrayList<>();
+        for(Word word: list){
+            if(word.getLevel() == level){
+                wordList.add(word);
+            }
+        }
+        return wordList;
+    }
+
 }

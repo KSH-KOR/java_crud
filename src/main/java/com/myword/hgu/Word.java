@@ -65,6 +65,6 @@ public class Word {
     }
 
     public String toFileFormatString(){
-        return this.getLevel() + "\\|" + this.getWord() +"\\|" + this.getMeaning();
+        return this.getLevel() + "|" + this.getWord() +"|" + this.getMeaning();
     }
 }
