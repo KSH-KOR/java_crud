@@ -140,7 +140,13 @@ public class WordCRUD implements ICRUD{
             }
         }
         listAll(level);
+    }
 
+    public void searchWord() {
+        System.out.println("=> 검색할 단어는? : ");
+        String keyword = s.next();
+        s.nextLine();
+        listAll(keyword);
     }
 
     @Override
@@ -207,5 +213,6 @@ public class WordCRUD implements ICRUD{
         }
         return wordList;
     }
+
 
 }

@@ -27,8 +27,8 @@ public class WordManager {
         System.out.println(
                         "*** 영단어 마스터 ***\n" +
                         "********************\n" +
-                        "1.모든 단어 보기\n" +
-                        "2.수준별 단어 보기\n" +
+                        "1. 모든 단어 보기\n" +
+                        "2. 수준별 단어 보기\n" +
                         "3. 단어 검색\n" +
                         "4. 단어 추가\n" +
                         "5. 단어 수정\n" +
@@ -71,7 +71,7 @@ public class WordManager {
                     wordCRUD.searchLevel();
                 }
                 case searchWords -> {
-                    //wordCRUD.selectOne();
+                    wordCRUD.searchWord();
                 }
                 case addWords -> {
                     wordCRUD.addWord();
