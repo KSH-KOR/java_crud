@@ -61,6 +61,7 @@ public class WordManager {
     }
     public void start(){
         isProgramRunning = true;
+        wordCRUD.loadFile();
         while(isProgramRunning){
             switch (selectMenu()){
                 case allWords -> {

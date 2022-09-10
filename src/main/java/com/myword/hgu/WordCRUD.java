@@ -1,12 +1,38 @@
 package com.myword.hgu;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.UUID;
 
 public class WordCRUD implements ICRUD{
     ArrayList<Word> list;
-    Scanner s;
+    final Scanner s;
+    private final String fileName = "dictionary.txt";
+    private final String regex = "\\|";
+
+    public void loadFile(){
+        int count = 0;
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
+            while(true){
+                String line = bufferedReader.readLine();
+                if(line == null) break;
+                String[] dictionaryComponents = line.split(regex);
+                list.add(new Word(dictionaryComponents));
+                count++;
+            }
+            bufferedReader.close();
+            System.out.println("==> " + count + "개 로딩 완료!!");
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public WordCRUD(Scanner s) {
         this.list = new ArrayList<Word>();
@@ -39,6 +65,8 @@ public class WordCRUD implements ICRUD{
         System.out.println("새 단어가 단어장에 추가되었습니다.");
         //System.out.println("New vocab is added in the vocab book.");
     }
+
+
 
     @Override
     public int update(Object obj) {

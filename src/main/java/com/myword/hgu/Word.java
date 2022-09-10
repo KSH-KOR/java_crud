@@ -1,5 +1,7 @@
 package com.myword.hgu;
 
+import java.util.UUID;
+
 public class Word {
     private final String id;
     private int level;
@@ -8,10 +10,17 @@ public class Word {
 
 
     public Word(String id, int level, String word, String meaning) {
-        this.id = id;
+        this.id = UUID.randomUUID().toString().replace("-", "");
         this.level = level;
         this.word = word;
         this.meaning = meaning;
+    }
+
+    public Word(String[] dictionaryComponents){
+        this.id = UUID.randomUUID().toString().replace("-", "");
+        this.level = Integer.parseInt(dictionaryComponents[0]);
+        this.word = dictionaryComponents[1];
+        this.meaning = dictionaryComponents[2];
     }
 
     public void setLevel(int level) {
