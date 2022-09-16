@@ -1,4 +1,9 @@
 1|love|사랑
 1|work|일하다
-2|device|디바이스
 1|laptop|노트북
+2|complete|완료하다
+2|structure|구조
+2|document|문서
+3|antithesis|대조법
+3|beguile|속이다
+3|compunction|큰 죄책감

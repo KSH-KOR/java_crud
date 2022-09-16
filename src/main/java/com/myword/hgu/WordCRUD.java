@@ -49,8 +49,6 @@ public class WordCRUD implements ICRUD{
         this.s = s;
     }
 
-
-
     @Override
     public Object add() {
         System.out.println("=> 난이도(1,2,3) & 새 단어 입력 : ");
@@ -75,6 +73,9 @@ public class WordCRUD implements ICRUD{
 
     @Override
     public int update(Object obj) {
+//        System.out.println("=> 뜻 입력 : ");
+//        String meaning = s.nextLine();
+//        obj.setMeaning(meaning);
         return 0;
     }
 
@@ -92,6 +93,7 @@ public class WordCRUD implements ICRUD{
             s.nextLine();
             System.out.println("=> 뜻 입력 : ");
             String meaning = s.nextLine();
+//            update(getWordFromId(wordIdList.get(indexOfWordIdList)));
             getWordFromId(wordIdList.get(indexOfWordIdList)).setMeaning(meaning);
             System.out.println("단어가 수정 되었습니다.");
         }
@@ -130,7 +132,7 @@ public class WordCRUD implements ICRUD{
 
     public void searchLevel() {
         int level;
-        System.out.println("=> 원하는 레벨은? (1,2,3) : ");
+        System.out.println("=> 레벨(1:초급, 2:중급, 3:고급) 선택 : ");
         while(true){
             level = s.nextInt();
             if(level < 1 || level > 3){
